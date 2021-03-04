@@ -1,3 +1,5 @@
+/* Dot env configuration */
+require("dotenv").config();
 /* Librarys that we will be using */
 const discord = require("discord.js");
 const fs = require("fs");
@@ -5,7 +7,7 @@ const fs = require("fs");
 const client = new discord.Client();
 /* Commands and categories */
 client.commands = new discord.Collection();
-client.categories = new discord.Collection();
+client.categories = [];
 /* Go through each folder and command and add them to the collection */
 const folders = fs.readdirSync("./commands");
 for (const folder of folders) {
@@ -23,7 +25,7 @@ for (const eventFile of eventFiles) {
 	if (event.once) {
 		client.once(event.name, (...args) => event.run(...args, client));
 	} else {
-		client.on(event.name, (...args) => event.run(...args));
+		client.on(event.name, (...args) => event.run(...args, client));
 	}
 }
 /* Log-in the client using super secret token */
