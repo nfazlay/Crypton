@@ -1,0 +1,46 @@
+env:
+  es6: true
+
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: 2019
+  sourceType: module
+
+plugins:
+  - '@typescript-eslint'
+
+rules: {
+    "brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+		"comma-dangle": "off",
+		"comma-spacing": "error",
+		"comma-style": "error",
+		"no-mixed-spaces-and-tabs":"error",
+		"curly": "off",
+		"dot-location": ["error", "property"],
+		"handle-callback-err": "off",
+		"camelcase":"error",
+		"max-nested-callbacks": "off",
+		"max-statements-per-line": "off",
+		"no-else-return": "error",
+		"no-empty-function": "error",
+		"no-floating-decimal": "error",
+		"no-inline-comments": "error",
+		"no-lonely-if": "error",
+		"no-multi-spaces": "error",
+		"no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+		"no-shadow": "off",
+		"no-trailing-spaces": ["error"],
+		"no-var": "error",
+		"no-useless-return": "error",
+		"object-curly-spacing": ["error", "always"],
+		"prefer-const": "error",
+		"quotes":["error","double"],
+		"semi": ["error", "always"],
+		"space-before-blocks": "off",
+		"space-before-function-paren": "off",
+		"space-in-parens": "off",
+		"space-infix-ops": "off",
+		"space-unary-ops": "off",
+		"spaced-comment": "off",
+		"yoda": "error"
+}
