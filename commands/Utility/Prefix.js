@@ -1,4 +1,4 @@
-const db = require("../models/modelPrefix");
+const prefixDb = require("../../models/modelPrefix");
 
 module.exports = {
 	name: "Prefix",
@@ -8,14 +8,14 @@ module.exports = {
 	args: true,
 	usage: "<newPrefix>",
 	run: async (message, args) => {
-		const data = await db.findOne({
+		const data = await prefixDb.findOne({
 			guildId: message.guild.id
 		});
 		if (data) {
 			data.prefix.unshift(args[0]);
 			data.save();
 		} else if (!data) {
-			const newData = new db({
+			const newData = new prefixDb({
 				prefix: args[0],
 				guildId: message.guild.id
 			});
