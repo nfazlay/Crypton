@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 /* The client object */
 const client = new discord.Client();
 /* Mongo DB connection */
-mongoose.connect("mongodb+srv://Admin:nextgentechservices@database.ub79n.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect(process.env.mongodbtoken, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 /* Commands and categories */
 client.commands = new discord.Collection();
 client.categories = [];
