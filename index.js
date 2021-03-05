@@ -3,8 +3,11 @@ require("dotenv").config();
 /* Librarys that we will be using */
 const discord = require("discord.js");
 const fs = require("fs");
+const mongoose = require("mongoose");
 /* The client object */
 const client = new discord.Client();
+/* Mongo DB connection */
+mongoose.connect("mongodb+srv://Admin:nextgentechservices@database.ub79n.mongodb.net/test", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 /* Commands and categories */
 client.commands = new discord.Collection();
 client.categories = [];
@@ -28,5 +31,9 @@ for (const eventFile of eventFiles) {
 		client.on(event.name, (...args) => event.run(...args, client));
 	}
 }
+/* Handle errors */
+process.on("unhandledRejection", err => {
+	console.log(err);
+});
 /* Log-in the client using super secret token */
 client.login(process.env.token);
