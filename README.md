@@ -3,26 +3,32 @@
 Crypton is a open source Discord bot made in JavaScript with Node.js and discord.js library
 
 It has the following features out of the box:
-• Mongo DB Database
-• Event Handler
-• Command Handler
-• .env support
+* Mongo DB Database Integrated by default
+* Event Handler
+* Command Handler
+* .env support
 
 # Installation
 
 **Requirements:**
-• Node.js 12+
-• npm 6+
+* Node.js 12.0.0+
+* npm 6.0.0+
 
 You can install cypton easily by cloning it using git (or GitHub desktop)
 
 ```bash
 git clone https://github.com/Crypton-Technologies/Crypton.git
-npm i
+cd Crypton
+npm install
 ```
-
-Then change your required values in .env file and run
-
+Make a new file called `.env` in the root of your project (where you have index.js file)
+Use your preferred code editor to write the following in it (with your own values for the specific), this file is case-sensitive.
+```env
+token="your bot token"
+prefix="any prefix"
+mongodbtoken="mongodb compass connect url"
+```
+then finally run this command to start your bot
 ```bash
 node index.js
 ```
