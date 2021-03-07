@@ -7,8 +7,8 @@
     "doc": "docs"
   },
   "scripts": {
-	"start": "node index.js",
-    "test": "nodmon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +25,13 @@
   },
   "homepage": "https://github.com/InterConX/Crypton#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.21.0",
     "mongoose": "^5.11.18"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
