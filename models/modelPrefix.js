@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const prefixSchema = new mongoose.Schema({
 	prefix: String,
-	guildId: Number,
+	guildId: String,
 });
 
 module.exports = mongoose.model("Prefix", prefixSchema);

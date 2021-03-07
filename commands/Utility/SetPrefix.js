@@ -1,7 +1,7 @@
 const prefixDb = require("../../models/modelPrefix");
 
 module.exports = {
-	name: "Prefix",
+	name: "SetPrefix",
 	description: "Change prefix for your server",
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
@@ -12,7 +12,7 @@ module.exports = {
 			guildId: message.guild.id
 		});
 		if (data) {
-			data.prefix.unshift(args[0]);
+			data.prefix = args[0];
 			data.save();
 		} else if (!data) {
 			const newData = new prefixDb({
