@@ -35,7 +35,7 @@ module.exports = {
 		const disableData = disabledChannelDb.findOne({
 			guildId: message.guild.id
 		});
-		if (disableData.disabledChannels.find(element => element === message.channel.id)) {
+		if (typeof disableData.disabledChannels != "undefined" && disableData.disabledChannels.find(element => element === message.channel.id)) {
 			return message.reply("This channel is disabled for all commands");
 		}
 		/* Cooldowns for commands */
