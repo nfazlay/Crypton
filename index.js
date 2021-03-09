@@ -11,7 +11,7 @@ const client = new discord.Client();
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
-		new winston.transports.File({ filename: "error-log" }),
+		new winston.transports.File({ filename: "logs" }),
 	],
 	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
 });

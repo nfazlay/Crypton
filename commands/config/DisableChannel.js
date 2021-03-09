@@ -1,4 +1,4 @@
-const disableDb = require("../../models/modelDisableChannel");
+const disableDb = require("../../models/modelDisabled");
 
 module.exports =
 {
@@ -29,6 +29,7 @@ module.exports =
 				disabledChannels: [{
 					channelId: toDisable.id,
 				}, ],
+				disabledSpecials: [],
 			});
 			newData.save();
 		}

@@ -1,4 +1,4 @@
-const disableDb = require("../../models/modelDisableChannel");
+const disableDb = require("../../models/modelDisabled");
 
 module.exports =
 {
