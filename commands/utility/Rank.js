@@ -8,12 +8,13 @@ module.exports = {
         aliases: ["level"],
         guildOnly: true,
         run: async (message) => {
+			const member = message.mentions.users.first() || message.author;
 			let xp;
 			let lvl;
 
-			const data = rankingDb.findOne({
+			const data = await rankingDb.findOne({
 				guildId: message.guild.id,
-				userId: message.author.id,
+				userId: member.id,
 			});
 
 			if (data) {
@@ -22,7 +23,7 @@ module.exports = {
 			} else if (!data) {
 				const newData = new rankingDb({
 					guildId: message.guild.id,
-					userId: message.author.id,
+					userId: member.id,
 					xp: 0,
 					lvl: 0,
 				});
@@ -30,8 +31,6 @@ module.exports = {
 				xp = 0;
 				lvl = 0;
 			}
-
-                const member = message.mentions.users.first() || message.author;
 
                 if (xp === 0 && lvl === 0) {
                         return message.reply("You dont have any level, please send some messages and try again.");

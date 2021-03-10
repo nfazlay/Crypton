@@ -8,12 +8,21 @@ const mongoose = require("mongoose");
 /* The client object */
 const client = new discord.Client();
 /* Logger for errors */
+const Logformat = winston.format.printf(({ level, message, timestamp }) => {
+	return `${timestamp} - ${level.toUpperCase()}: ${message}`;
+});
+
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
 		new winston.transports.File({ filename: "logs" }),
 	],
-	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
+	format: winston.format.combine(
+		winston.format.timestamp(),
+		winston.format.colorize({ all: true }),
+		winston.format.prettyPrint(),
+		Logformat
+	),
 });
 /* Client events for logging */
 client.on("debug", m => logger.log("debug", m));
