@@ -3,32 +3,9 @@ require("dotenv").config();
 /* Librarys that we will be using */
 const discord = require("discord.js");
 const fs = require("fs");
-const winston = require("winston");
 const mongoose = require("mongoose");
 /* The client object */
 const client = new discord.Client();
-/* Logger for errors */
-const Logformat = winston.format.printf(({ level, message, timestamp }) => {
-	return `${timestamp} - ${level.toUpperCase()}: ${message}`;
-});
-
-const logger = winston.createLogger({
-	transports: [
-		new winston.transports.Console(),
-		new winston.transports.File({ filename: "logs" }),
-	],
-	format: winston.format.combine(
-		winston.format.timestamp(),
-		winston.format.colorize({ all: true }),
-		winston.format.prettyPrint(),
-		Logformat
-	),
-});
-/* Client events for logging */
-client.on("debug", m => logger.log("debug", m));
-client.on("warn", m => logger.log("warn", m));
-client.on("error", m => logger.log("error", m));
-
 /* Mongo DB connection */
 mongoose.connect(process.env.MONGO_CONNECTION_URL, {
   useNewUrlParser: true,
@@ -62,7 +39,7 @@ for (const eventFile of eventFiles) {
   }
 }
 /* Handle errors */
-process.on("unhandledRejection", error => logger.log("error", error));
-process.on("uncaughtException", error => logger.log("error", error));
+process.on("unhandledRejection", error => console.log(error));
+process.on("uncaughtException", error => console.log(error));
 /* Log-in the client using super secret token */
 client.login(process.env.TOKEN);

@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "canvacord": "^5.1.0",
+    "discord-canvas": "^1.4.1",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.21.0",

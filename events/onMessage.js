@@ -33,9 +33,11 @@ module.exports = {
 		if (message.author.bot) return;
 		/* Check if message starts with prefix */
 		if (!message.content.startsWith(prefix)) {
-			/*if (typeof disableData.disabledSpecials != "undefined" && disableData.disabledSpecials.find(element => element === message.channel.id)) {
-				return message.reply("This channel is disabled for all commands");
-			}*/
+			if (disableData && disableData.disabledSpecials) {
+				if (disableData.disabledSpecials.find(element => element.RankDisabled === true)) {
+					return;
+				}
+			}
 
 			if (!chatCooldown.has(message.author.id)) {
 				chatCooldown.set(message.author.id, new discord.Collection());
@@ -77,13 +79,8 @@ module.exports = {
 					userId: message.author.id,
 					xp: 0,
 					lvl: 0,
-					isDisabled: false,
 				});
 				newData.xp += xpToAdd;
-				if (newData.xp >= (newData.lvl + 1) * 200) {
-					newData.xp -= (newData.lvl + 1) * 200;
-					newData.lvl += 1;
-				}
 				newData.save();
 			}
 			return;
