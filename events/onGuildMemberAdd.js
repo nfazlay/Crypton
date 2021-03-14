@@ -15,8 +15,8 @@ module.exports = {
 			.setMemberCount(member.guild.memberCount)
 			.setUsername(member.user.username)
 			.setDiscriminator(member.user.discriminator)
-			.setGuildName(member.guild.name)
-			.setAvatar(member.displayAvatarURL({ dynamic: false, format: "png" }));
+			.setAvatar(member.user.displayAvatarURL({ format: "jpeg" }))
+			.setGuildName(member.guild.name);
 
 			if (welcomeData.role && member.guild.roles.cache.get(welcomeData.role)) {
 				member.roles.add(welcomeData.role);

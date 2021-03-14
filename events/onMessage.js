@@ -15,18 +15,19 @@ module.exports = {
 		const disableData = await disabledDb.findOne({
 			guildId: message.guild.id
 		});
-
+	if (disableData && disableData.disabledWords) {
 		for (let i = 0; i < disableData.disabledWords.length; i++) {
 			const element = disableData.disabledWords[i];
 			for (let index = 0; index < message.content.split(/ +/).length; index++) {
 				const word = message.content.split(/ +/)[index];
-				if (word.has(element)) {
+				if (word.toLowerCase().includes(element.toLowerCase())) {
 					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
 					message.delete();
 					break;
 				}
 			}
 		}
+	}
 		/* Get the Prefix data from the model */
 		const prefixData = await prefixDb.findOne({
 			guildId: message.guild.id,
