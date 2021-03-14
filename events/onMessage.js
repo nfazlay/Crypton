@@ -11,13 +11,25 @@ const cooldowns = new discord.Collection();
 module.exports = {
 	name: "message",
 	run: async (message, client) => {
-		/* Get the Prefix data from the model */
-		const prefixData = await prefixDb.findOne({
-			guildId: message.guild.id,
-		});
 		/* Get the disabled info data */
 		const disableData = await disabledDb.findOne({
 			guildId: message.guild.id
+		});
+
+		for (let i = 0; i < disableData.disabledWords.length; i++) {
+			const element = disableData.disabledWords[i];
+			for (let index = 0; index < message.content.split(/ +/).length; index++) {
+				const word = message.content.split(/ +/)[index];
+				if (word.has(element)) {
+					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
+					message.delete();
+					break;
+				}
+			}
+		}
+		/* Get the Prefix data from the model */
+		const prefixData = await prefixDb.findOne({
+			guildId: message.guild.id,
 		});
 		/* Initialize the prefix variable */
 		let prefix;
@@ -34,7 +46,7 @@ module.exports = {
 		/* Check if message starts with prefix */
 		if (!message.content.startsWith(prefix)) {
 			if (disableData && disableData.disabledSpecials) {
-				if (disableData.disabledSpecials.find(element => element.RankDisabled === true)) {
+				if (disableData.disabledSpecials.find(element => element.Ranking === false)) {
 					return;
 				}
 			}

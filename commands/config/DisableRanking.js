@@ -14,7 +14,7 @@ module.exports =
 
 		if (data) {
 			data.disabledSpecials.unshift({
-                RankDisabled: true,
+                Ranking: true,
             });
 			data.save();
 		} else if (!data) {
