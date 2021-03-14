@@ -23,7 +23,7 @@ module.exports = {
 				if (word.toLowerCase().includes(element.toLowerCase())) {
 					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
 					message.delete();
-					break;
+					return;
 				}
 			}
 		}
