@@ -15,19 +15,6 @@ module.exports = {
 		const disableData = await disabledDb.findOne({
 			guildId: message.guild.id
 		});
-	if (disableData && disableData.disabledWords) {
-		for (let i = 0; i < disableData.disabledWords.length; i++) {
-			const element = disableData.disabledWords[i];
-			for (let index = 0; index < message.content.split(/ +/).length; index++) {
-				const word = message.content.split(/ +/)[index];
-				if (word.toLowerCase().includes(element.toLowerCase())) {
-					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
-					message.delete();
-					return;
-				}
-			}
-		}
-	}
 		/* Get the Prefix data from the model */
 		const prefixData = await prefixDb.findOne({
 			guildId: message.guild.id,
@@ -42,6 +29,20 @@ module.exports = {
 			/* else get the default from .env */
 			prefix = process.env.PREFIX;
 		}
+/* Check if word is banned if it is then delete */
+	if (disableData && disableData.disabledWords) {
+		for (let i = 0; i < disableData.disabledWords.length; i++) {
+			const element = disableData.disabledWords[i];
+			for (let index = 0; index < message.content.split(/ +/).length; index++) {
+				const word = message.content.split(/ +/)[index];
+				if (word.toLowerCase().includes(element.toLowerCase()) && !message.content.toLowerCase().startsWith(`${prefix}unblacklist`) && !message.channel.permissionsFor(message.author).has("MANAGE_GUILD")) {
+					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
+					message.delete();
+					return;
+				}
+			}
+		}
+	}
 		/* Check if message was sent by bot */
 		if (message.author.bot) return;
 		/* Check if message starts with prefix */

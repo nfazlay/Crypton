@@ -3,8 +3,8 @@ const welcomeDb = require("../../models/modelWelcoming");
 
 module.exports = {
 	name: "Welcoming",
-	description: "Setup welcoming with crypton!",
-	aliases: ["welcome-setup"],
+	description: "Setup welcoming messages with crypton!",
+	aliases: ["welcoming-setup"],
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
 	run: async (message) => {
