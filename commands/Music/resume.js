@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "resume",
   description: "Resumes the Paused Song",
@@ -6,23 +7,37 @@ module.exports = {
   run: async (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
-      return message.reply("there is no music playing around you!");
-    }
-    const { channel } = message.member.voice;
-    if (!channel) {
-      return message.reply("You need to join a vc to run this command.");
-    }
-    if (channel.id != player.voiceChannel) {
-      return message.reply(
-        "You are not in a channel where music is being played!"
-      );
+      message.reply("There is no song playing!");
+      return;
     }
 
+    const { channel } = message.member.voice;
+    if (!channel) {
+      const NotInVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You have to join Voice Channel to Run this Command");
+      message.channel.send(NotInVoiceChannelEmbed);
+      return;
+    }
+    if (channel.id !== player.voiceChannel) {
+      const NotInSameVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You are not in the same voice channel!");
+      message.channel.send(NotInSameVoiceChannelEmbed);
+      return;
+    }
     if (!player.paused) {
-      return message.reply("Music is not paused to Resume it!");
+      const NotPausedEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("Music is Not Paused to Resume");
+      message.channel.send(NotPausedEmbed);
+      return;
     }
     await message.react("▶️");
     player.pause(false);
-    return message.reply("Music has been resumed!");
+    const ResumedEmbed = new MessageEmbed()
+      .setColor("BLUE")
+      .setDescription("Music Has Been Resumed!");
+    return message.channel.send(ResumedEmbed);
   },
 };

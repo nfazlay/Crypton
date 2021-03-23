@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "pause",
   description: "Pauses The playing Song",
@@ -6,24 +7,37 @@ module.exports = {
   run: async (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
-      return message.reply("There is no music playing around you!");
+      message.reply("There is no song playing!");
+      return;
     }
+
     const { channel } = message.member.voice;
     if (!channel) {
-      return message.reply(
-        "Your not in a VC, please join a vc to use this cmmand."
-      );
+      const NotInVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You have to join Voice Channel to Run this Command");
+      message.channel.send(NotInVoiceChannelEmbed);
+      return;
     }
-    if (channel.id != player.voiceChannel) {
-      return message.reply(
-        "You are not in the Vc in which the Music is being played, please join that vc to Pause!"
-      );
+    if (channel.id !== player.voiceChannel) {
+      const NotInSameVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You are not in the same voice channel!");
+      message.channel.send(NotInSameVoiceChannelEmbed);
+      return;
     }
     if (player.paused) {
-      return message.reply("Music is already paused!");
+      const alreadyPausedEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("Music is Already Paused");
+      message.channel.send(alreadyPausedEmbed);
+      return;
     }
     await message.react("⏸️");
     player.pause(true);
-    return message.reply("Paused the Music!");
+    const PausedEmbed = new MessageEmbed()
+      .setColor("BLUE")
+      .setDescription("Music Has Been Paused!");
+    return message.channel.send(PausedEmbed);
   },
 };

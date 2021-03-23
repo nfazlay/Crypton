@@ -17,14 +17,18 @@ module.exports = {
       voiceChannel: message.member.voice.channel.id,
       textChannel: message.channel.id,
     });
-
+    message.member.voice.channel.join().then((con) => {
+      //eslint-disable-next-line
+      con.voice.setDeaf(true).catch((err) => {});
+    });
     player.connect();
     if (player.playing && player.queue.current) {
       player.queue.add(res.tracks[0]);
+      message.react("👌");
       return message.reply(`Added \`${res.tracks[0].title}\` to Queue`);
     }
     // if (!player.playing && !player.paused && !player.queue.size) player.play();
-
+    message.react("👌");
     player.play(res.tracks[0]);
     const playingEmbed = new MessageEmbed()
       .setAuthor("Crypton Music")
@@ -46,6 +50,7 @@ module.exports = {
         }
       );
     message.channel.send(playingEmbed);
+
     //work in progress
     // if (!player.playing && !player.paused && !player.queue.size) player.play();
     // if (

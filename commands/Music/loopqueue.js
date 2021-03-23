@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "loopqueue",
   description: "Loops The whole Queue",
@@ -12,22 +13,33 @@ module.exports = {
       return message.reply("🙄There is No Music Playing around you");
     }
     const { channel } = message.member.voice;
-
     if (!channel) {
-      return message.reply("you need to join a vc to run this command!");
+      const NotInVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You have to join Voice Channel to Run this Command");
+      message.channel.send(NotInVoiceChannelEmbed);
+      return;
     }
-    if (channel.id != player.voiceChannel) {
-      return message.reply(
-        "You are not in a channel where music is being played!"
-      );
+    if (channel.id !== player.voiceChannel) {
+      const NotInSameVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You are not in the same voice channel!");
+      message.channel.send(NotInSameVoiceChannelEmbed);
+      return;
     }
     if (args[0] === "yes") {
       player.setQueueRepeat(true);
-      return message.reply("Queue Loop is Turned on");
+      const StartedLoopingQueueEmbed = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription("Looping The Whole Queue Now");
+      return message.channel.send(StartedLoopingQueueEmbed);
     }
     if (args[0] === "no") {
       player.setQueueRepeat(false);
-      return message.reply("Queue Loop is Turned off");
+      const StoppedLoopingQueueEmbed = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription("Stopped Looping The Whole Queue");
+      return message.channel.send(StoppedLoopingQueueEmbed);
     }
   },
 };

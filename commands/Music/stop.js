@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = {
   name: "stop",
   description: "Stops Playing music",
@@ -5,21 +7,31 @@ module.exports = {
   run: async (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
-      return message.reply("There is No Music Playing around you!");
+      message.reply("There is no song playing!");
+      return;
     }
-    const { channel } = message.member.voice;
 
+    const { channel } = message.member.voice;
     if (!channel) {
-      return message.reply("you need to join a vc to run this command!");
+      const NotInVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You have to join Voice Channel to Run this Command");
+      message.channel.send(NotInVoiceChannelEmbed);
+      return;
     }
-    if (channel.id != player.voiceChannel) {
-      return message.reply(
-        "You are not in a channel where music is being played!"
-      );
+    if (channel.id !== player.voiceChannel) {
+      const NotInSameVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You are not in the same voice channel!");
+      message.channel.send(NotInSameVoiceChannelEmbed);
+      return;
     }
 
     await message.react("🛑");
     player.destroy();
-    return message.reply("Stopped Playing Music!");
+    const StopedEmbed = new MessageEmbed()
+      .setColor("BLUE")
+      .setDescription("🥺 Stopped playing music");
+    return message.channel.send(StopedEmbed);
   },
 };

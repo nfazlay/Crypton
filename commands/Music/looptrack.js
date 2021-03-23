@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "looptrack",
   description: "Loops The Current Playing Song",
@@ -5,29 +6,48 @@ module.exports = {
   aliases: ["loopt", "lt"],
   run: async (message, args) => {
     if (!args.length) {
-      return message.reply("Mention `yes` or `No` as Argument");
+      const NoArgsEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("Mention `yes` or `No` as Argument");
+      message.channel.send(NoArgsEmbed);
+      return;
     }
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
-      return message.reply("🙄There is No Music Playing around you");
+      message.reply("There is no song playing!");
+      return;
     }
-    const { channel } = message.member.voice;
 
+    const { channel } = message.member.voice;
     if (!channel) {
-      return message.reply("you need to join a vc to run this command!");
+      const NotInVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You have to join Voice Channel to Run this Command");
+      message.channel.send(NotInVoiceChannelEmbed);
+      return;
     }
-    if (channel.id != player.voiceChannel) {
-      return message.reply(
-        "You are not in a channel where music is being played!"
-      );
+    if (channel.id !== player.voiceChannel) {
+      const NotInSameVoiceChannelEmbed = new MessageEmbed()
+        .setColor("RED")
+        .setDescription("You are not in the same voice channel!");
+      message.channel.send(NotInSameVoiceChannelEmbed);
+      return;
     }
+    const { title, uri } = player.queue.current;
     if (args[0] === "yes") {
       player.setTrackRepeat(true);
-      return message.reply("Track Loop is Turned on");
+      message.react("🔁");
+      const StartedLoopingTrackEmbed = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription(`Looping The Track [${title}](${uri})`);
+      return message.channel.send(StartedLoopingTrackEmbed);
     }
     if (args[0] === "no") {
       player.setTrackRepeat(false);
-      return message.reply("Track Loop is Turned off");
+      const StoppedLoopingTrackEmbed = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription(`Stopped Looping The Track [${title}](${uri})`);
+      return message.channel.send(StoppedLoopingTrackEmbed);
     }
   },
 };
