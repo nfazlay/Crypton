@@ -4,7 +4,7 @@ module.exports = {
   name: "disconnect",
   description: "Disconnects the Bot from Voice Channel.",
   guildOnly: true,
-  aliases: ["dc","leave"],
+  aliases: ["dc", "leave"],
   run: async (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
