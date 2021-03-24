@@ -13,7 +13,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - changelog.md
 - Some Music Commands for Next version
 
-## Changed
+### Changed
 
 - Replaced All Music messages into Embeds
 - Switched to Changing Bot's Activity
+
+## [1.1.7] - 2021/03/24
+
+### Added
+
+- Clear, Shuffle Music Commands
+- Unfinshed YT notifications (testing)
+
+### Changed
+
+- Auto Bot Activity Change to 30 mins
+
+### Removed
+
+- skipto/seek command
+- Dev Only Commands
+
+### Fixed
+
+- Music Not Playing Bug
+- Gap While adding songs to queue

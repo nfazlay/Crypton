@@ -31,7 +31,7 @@ module.exports = {
       .setColor("BLUE")
       .setDescription("See you soon!");
     message.channel.send(disconnectEmbed);
-    channel.leave();
+
     await player.disconnect();
   },
 };

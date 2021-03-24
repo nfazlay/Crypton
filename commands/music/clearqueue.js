@@ -1,6 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-  name: "shuffle",
+  name: "clearqueue",
+  description: "Clears Whole Queue",
+  guildOnly: true,
+  aliases: ["cq", "clearq", "clearque"],
   run: (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
@@ -37,12 +40,12 @@ module.exports = {
         .setDescription("The Queue is Empty, play some songs First.");
       return message.channel.send(NoQueueEmbed);
     }
-
-    message.react("🔀");
-    queue.shuffle();
-    const shuffledQueueEmbed = new MessageEmbed()
+    message.react("👌");
+    const queueSize = queue.size;
+    queue.clear();
+    const clearedQueueEmbed = new MessageEmbed()
       .setColor("BLUE")
-      .setDescription("Shuffled The Queue");
-    message.channel.send(shuffledQueueEmbed);
+      .setDescription(`Cleared ${queueSize} Songs From Queue.`);
+    message.channel.send(clearedQueueEmbed);
   },
 };

@@ -21,7 +21,7 @@ module.exports = {
         type: statusArray[status].type,
       });
     };
-    setInterval(randomStaus, 3000);
+    setInterval(randomStaus, 30000);
     console.log(`Logged in as ${client.user.tag}!`);
   },
 };
