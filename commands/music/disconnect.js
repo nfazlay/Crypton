@@ -4,7 +4,7 @@ module.exports = {
   name: "disconnect",
   description: "Disconnects the Bot from Voice Channel.",
   guildOnly: true,
-  aliases: ["dc"],
+  aliases: ["dc","leave"],
   run: async (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {
@@ -29,7 +29,7 @@ module.exports = {
     await message.react("👋");
     const disconnectEmbed = new MessageEmbed()
       .setColor("BLUE")
-      .setDescription("Bye Bye!");
+      .setDescription("See you soon!");
     message.channel.send(disconnectEmbed);
     channel.leave();
     await player.disconnect();

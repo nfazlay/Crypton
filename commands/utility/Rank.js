@@ -6,6 +6,7 @@ module.exports = {
         name: "Rank",
         description: "displays your rank in the server",
         aliases: ["level"],
+      	requiresDb: true,
         guildOnly: true,
         run: async (message) => {
 			const member = message.mentions.users.first() || message.author;

@@ -6,6 +6,7 @@ module.exports = {
 	description: "Setup leaving messages with crypton!",
 	aliases: ["Leaver-setup"],
 	guildOnly: true,
+	requiresDb: true,
 	permissions: "MANAGE_GUILD",
 	run: async (message) => {
 

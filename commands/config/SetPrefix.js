@@ -6,6 +6,7 @@ module.exports = {
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
 	args: true,
+	requiresDb: true,
 	usage: "<newPrefix>",
 	run: async (message, args) => {
 		const data = await prefixDb.findOne({

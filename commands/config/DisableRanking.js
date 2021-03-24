@@ -5,6 +5,7 @@ module.exports =
 	name: "DisableRanking",
 	description: "Disable ranking for your server!",
 	guildOnly: true,
+	requiresDb: true,
 	permissions: "MANAGE_GUILD",
 	run: async(message) => {
 

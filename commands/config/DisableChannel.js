@@ -7,6 +7,7 @@ module.exports =
 	args: true,
 	usage: "#ChannelMention",
 	guildOnly: true,
+	requiresDb: true,
 	permissions: "MANAGE_GUILD",
 	run: async(message) => {
 		const toDisable = message.mentions.channels.first();

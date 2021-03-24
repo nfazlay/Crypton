@@ -6,6 +6,7 @@ module.exports =
 	description: "Unblacklist a word so people can say it",
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
+	requiresDb: true,
 	run: async(message, args) => {
 
     const data = await disableDb.findOne({

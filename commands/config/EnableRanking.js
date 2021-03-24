@@ -6,6 +6,7 @@ module.exports =
 	description: "Enable ranking for your server!",
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
+	requiresDb: true,
 	run: async(message) => {
 
         const data = await rankingDb.findOne({

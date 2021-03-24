@@ -7,6 +7,7 @@ module.exports =
 	args: true,
 	usage: "<Word> or <Word1> <Word2> <Word3>",
 	guildOnly: true,
+	requiresDb: true,
 	permissions: "MANAGE_GUILD",
 	run: async(message, args) => {
 

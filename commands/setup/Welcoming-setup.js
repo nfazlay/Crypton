@@ -7,6 +7,7 @@ module.exports = {
 	aliases: ["welcoming-setup"],
 	guildOnly: true,
 	permissions: "MANAGE_GUILD",
+	requiresDb: true,
 	run: async (message) => {
 		const filter = m => m.author.id === message.author.id;
 		let roleToGive;
