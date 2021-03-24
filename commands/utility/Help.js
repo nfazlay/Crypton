@@ -23,7 +23,7 @@ module.exports = {
 
 		if (!args.length) {
 			data.push(
-				"Here's all my command categories:\n\n •" + categories.map(element => element.name).join("\n •")
+				"Here's all my command categories:\n\n •" + categories.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n •")
 			);
 			embed.setDescription(`${data}\n\n
 				**Note :** If you have any Doubts/Suggestions/Feedback Feel free to join our Support Server by [Clicking Here](https://discord.gg/fRVtnW8kY8)`)
@@ -38,7 +38,7 @@ module.exports = {
 		let toFind = args[0].toLowerCase();
 
 		if (categories.has(toFind)) {
-			const commandsOfFolder = categories.get(toFind).Collection.map(element => element.name).join("\n");
+			const commandsOfFolder = categories.get(toFind).Collection.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n");
 			const Categoryembed = new discord.MessageEmbed()
 				.setTitle(toFind)
 				.setDescription(commandsOfFolder)

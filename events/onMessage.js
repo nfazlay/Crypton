@@ -20,20 +20,19 @@ module.exports = {
 			guildId: message.guild.id,
 		});
 		/* Initialize the prefix variable */
-		let prefix = "$";
+		let prefix;
 		/* Check if any data */
-		// if (prefixData) {
-		// 	/* If there is then get prefix from data */
-		// 	prefix = prefixData.prefix;
-		// } else if (!prefixData) {
-		// 	/* else get the default from .env and save prefix for future*/
-		// 	prefix = process.env.PREFIX;
-		// 	const newPrefixData = new prefixDb({
-		// 		guildId: message.guild.id,
-		// 		prefix: process.env.prefix,
-		// 	});
-		// 	newPrefixData.save();
-		// }
+		if (prefixData) {
+			/* If there is then get prefix from data */
+			prefix = prefixData.prefix;
+		} else if (!prefixData) {
+			/* else get the default from .env */
+			if (process.env.PREFIX) {
+				prefix = process.env.PREFIX;
+			} else if (!process.env.PREFIX) {
+				console.error("Prefix not found in .env file bot may not run in the server");
+			}
+		}
 /* Check if word is banned if it is then delete */
 	if (disableData && disableData.disabledWords) {
 		for (let i = 0; i < disableData.disabledWords.length; i++) {

@@ -8,7 +8,7 @@ module.exports =
 	permissions: "MANAGE_GUILD",
 	run: async(message, args) => {
 
-        const data = await disableDb.findOne({
+    const data = await disableDb.findOne({
 			guildId: message.guild.id
 		});
 
