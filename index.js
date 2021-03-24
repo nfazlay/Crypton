@@ -7,11 +7,13 @@ const mongoose = require("mongoose");
 /* The client object */
 const client = new discord.Client();
 /* Mongo DB connection */
-mongoose.connect(process.env.MONGO_CONNECTION_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
+if (process.env.MONGO_CONNECTION_URL) {
+  mongoose.connect(process.env.MONGO_CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  });
+}
 /* Commands and categories */
 client.commands = new discord.Collection();
 client.categories = new discord.Collection();
@@ -42,4 +44,8 @@ for (const eventFile of eventFiles) {
 process.on("unhandledRejection", error => console.log(error));
 process.on("uncaughtException", error => console.log(error));
 /* Log-in the client using super secret token */
-client.login(process.env.TOKEN);
+if (process.env.TOKEN) {
+  client.login(process.env.TOKEN);
+} else {
+  console.error();("ERROR: Token not found in .env file! Make sure you have the token correct")
+}
