@@ -24,9 +24,9 @@ npm install
 Make a new file called `.env` in the root of your project (where you have index.js file)
 Use your preferred code editor to write the following in it (with your own values for the specific), this file is case-sensitive.
 ```env
-token="your bot token"
-prefix="any prefix"
-mongodbtoken="mongodb compass connect url"
+TOKEN="your bot token"
+PREFIX="your bot prefix"
+MONGO_CONNECTION_URL="your mongo db compass url"
 ```
 then finally run this command to start your bot
 ```bash
