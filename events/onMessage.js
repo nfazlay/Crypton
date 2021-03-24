@@ -15,12 +15,32 @@ module.exports = {
 		const disableData = await disabledDb.findOne({
 			guildId: message.guild.id
 		});
+		/* Get the Prefix data from the model */
+		const prefixData = await prefixDb.findOne({
+			guildId: message.guild.id,
+		});
+		/* Initialize the prefix variable */
+		let prefix = "$";
+		/* Check if any data */
+		// if (prefixData) {
+		// 	/* If there is then get prefix from data */
+		// 	prefix = prefixData.prefix;
+		// } else if (!prefixData) {
+		// 	/* else get the default from .env and save prefix for future*/
+		// 	prefix = process.env.PREFIX;
+		// 	const newPrefixData = new prefixDb({
+		// 		guildId: message.guild.id,
+		// 		prefix: process.env.prefix,
+		// 	});
+		// 	newPrefixData.save();
+		// }
+/* Check if word is banned if it is then delete */
 	if (disableData && disableData.disabledWords) {
 		for (let i = 0; i < disableData.disabledWords.length; i++) {
 			const element = disableData.disabledWords[i];
 			for (let index = 0; index < message.content.split(/ +/).length; index++) {
 				const word = message.content.split(/ +/)[index];
-				if (word.toLowerCase().includes(element.toLowerCase())) {
+				if (word.toLowerCase().includes(element.toLowerCase()) && !message.content.toLowerCase().startsWith(`${prefix}unblacklist`) && !message.channel.permissionsFor(message.author).has("MANAGE_GUILD")) {
 					message.channel.send("That word is not allowed!").then(msg => msg.delete({ timeout: 5000 }));
 					message.delete();
 					return;
@@ -28,20 +48,6 @@ module.exports = {
 			}
 		}
 	}
-		/* Get the Prefix data from the model */
-		const prefixData = await prefixDb.findOne({
-			guildId: message.guild.id,
-		});
-		/* Initialize the prefix variable */
-		let prefix;
-		/* Check if any data */
-		if (prefixData) {
-			/* If there is then get prefix from data */
-			prefix = prefixData.prefix;
-		} else if (!prefixData) {
-			/* else get the default from .env */
-			prefix = process.env.PREFIX;
-		}
 		/* Check if message was sent by bot */
 		if (message.author.bot) return;
 		/* Check if message starts with prefix */
@@ -83,15 +89,15 @@ module.exports = {
 				if (data.xp >= (data.lvl + 1) * 200) {
 					data.xp -= (data.lvl + 1) * 200;
 					data.lvl += 1;
-					data.save();
 					message.channel.send(`Congrats <@${message.author.id}> you reached level ${data.lvl}!`);
 				}
+				data.save();
 			} else if (!data) {
 				const newData = new rankingDb({
 					guildId: message.guild.id,
 					userId: message.author.id,
 					xp: 0,
-					lvl: 0,
+					lvl: 1,
 				});
 				newData.xp += xpToAdd;
 				newData.save();
@@ -141,6 +147,12 @@ module.exports = {
 			const authorPerms = message.channel.permissionsFor(message.author);
 			if (!authorPerms || !authorPerms.has(command.permissions)) {
 				return message.reply(`You need ${command.permissions.toLowerCase()} permission for this!`);
+			}
+		}
+		if (command.requiresDb) {
+			if (!process.env.MONGO_CONNECTION_URL) {
+				message.channel.send("Database connection has not been setted up, please contact the bot owner if the problem ouccurs again");
+				console.error("Mongo db compass url was not found in .env file make sure you have a compass URL");
 			}
 		}
 		/* If command needs arguments check if user gave them */
