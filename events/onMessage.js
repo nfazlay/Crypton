@@ -1,5 +1,6 @@
 /* Librarys that we will be using */
 const discord = require("discord.js");
+const stringSimilarity = require("string-similarity");
 /* Prefix Model */
 const prefixDb = require("../models/modelPrefix");
 const rankingDb = require("../models/modelRanking");
@@ -110,7 +111,22 @@ module.exports = {
 		const command = client.commands.get(commandName)
 			|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 		/* Check if command exists */
-		if (!command) return;
+		if (!command) {
+			const closestCommand = stringSimilarity.findBestMatch(commandName, client.rawArray);
+			let reply;
+			if (closestCommand.bestMatchIndex >= 40) {
+				const closestEmbed = new discord.MessageEmbed()
+				.setColor("RED")
+				.setTitle("Command not found")
+				.setFooter(`${closestCommand.bestMatchIndex}% match`)
+				.setTimestamp()
+				.addField("Did you mean", closestCommand.bestMatch.target, true);
+				reply = closestEmbed;
+			} else {
+				reply = "Command not found";
+			}
+			return message.channel.send(reply).then(msg => msg.delete({ timeout: 2000 }));
+		}
 		/* Check if command can run in channel */
 		if (disableData && disableData.disabledChannels) {
 			if (disableData.disabledChannels.find(element => element.channelId === message.channel.id)) {

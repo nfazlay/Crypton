@@ -59,6 +59,7 @@ if (process.env.MONGO_CONNECTION_URL) {
 }
 /* Commands and categories */
 client.commands = new discord.Collection();
+client.rawArray = [];
 client.categories = new discord.Collection();
 /* Go through each folder and command and add them to the collection */
 const folders = fs.readdirSync("./commands");
@@ -71,6 +72,7 @@ for (const folder of folders) {
   for (const commandFile of commands) {
     const command = require(`./commands/${folder}/${commandFile}`);
     client.commands.set(command.name.toLowerCase(), command);
+    client.rawArray.push(command.name);
     client.categories
       .get(folder.toLowerCase())
       .Collection.set(command.name.toLowerCase(), command);
