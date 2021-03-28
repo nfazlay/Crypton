@@ -1,0 +1,8 @@
+{
+    "defaultCashOnStart": 100,
+    "defaultLevel": 1,
+    "defaultWorkInterval": 28800000,
+    "defaultDailyInterval": 86400000,
+    "defaultDailyCash": 500,
+    "defaultCashOnWork": 150
+}

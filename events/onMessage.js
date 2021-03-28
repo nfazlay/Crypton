@@ -21,6 +21,7 @@ module.exports = {
 			guildId: message.guild.id,
 		});
 		/* Initialize the prefix variable */
+
 		let prefix;
 		/* Check if any data */
 		if (prefixData) {

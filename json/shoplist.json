@@ -1,0 +1,12 @@
+{
+    "Juice": {
+        "price": 100,
+        "useAble": true,
+        "message": "You drank a glass of juice, awesome!"
+    },
+    "Pizza": {
+        "price": 300,
+        "useAble": true,
+        "message": "Ah pizza, how does it taste?"
+    }
+}
