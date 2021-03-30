@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const ms = require("ms");
+// const canvacord = require("canvacord");
 
 module.exports = {
   name: "nowplaying",
@@ -7,28 +7,25 @@ module.exports = {
   guildOnly: true,
   aliases: ["current", "np", "cp"],
   run: async (message) => {
-    const player = message.client.manager.get(message.guild.id);
-    const currentSong = player.queue.current;
-
-    const playingEmbed = new MessageEmbed()
-      .setAuthor("Crypton Music")
+    const LyricsEmbed = new MessageEmbed()
       .setColor("BLUE")
-      .setTitle(`${currentSong.title}`)
-      .setThumbnail(currentSong.thumbnail)
-      .setURL(currentSong.uri)
-      .setFooter(`Req. by ${currentSong.requester.tag}`)
-      .addFields(
-        {
-          name: "Author:",
-          value: currentSong.author,
-          inline: true,
-        },
-        {
-          name: "Duration:",
-          value: ms(currentSong.duration),
-          inline: true,
-        }
+      .setDescription(
+        `Under Development | Raise Ticket [here](https://discord.gg/fRVtnW8kY8) for Faster Development`
       );
-    message.channel.send(playingEmbed);
+
+    message.channel.send(LyricsEmbed);
+    // const player = message.client.manager.get(message.guild.id);
+    // const currentSong = player.queue.current;
+    // const nowPlayingCard = new canvacord.Spotify()
+    //   .setAlbum("Crypton Music")
+    //   .setAuthor(currentSong.author)
+    //   .setImage(currentSong.thumbnail)
+    //   .setTitle(currentSong.title)
+    //   .setEndTimestamp(currentSong.duration)
+    //   .setStartTimestamp("2:06");
+    // nowPlayingCard.build(async (card) => {
+    //   const a = new MessageAttachment(card, "Spotify.png");
+    //   await message.channel.send(a);
+    // });
   },
 };

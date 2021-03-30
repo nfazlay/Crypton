@@ -38,3 +38,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Music Not Playing Bug
 - Gap While adding songs to queue
+
+## [1.1.8] - 2021/03/25
+
+### Added
+
+- Command Not Found, Did you mean?
+- Leaderboard Command
+- Joke Command
+- Developer Only Commands (uptime)
+- Server Rank to level/Rank Command
+- Messed with onMessage Event.
+- Economy
+
+### Fixed
+
+- onMessage event error on DM message
+- Command Not Found bug when only prefix is message
+- Discord spelling Mistake in invite command
+
+### Changed
+
+- Refactored Commands Directories
+
+### Removed
+
+- Emoji from Stop Command (Music)

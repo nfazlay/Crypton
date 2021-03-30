@@ -100,5 +100,6 @@ process.on("uncaughtException", (error) => console.log(error));
 if (process.env.TOKEN) {
   client.login(process.env.TOKEN);
 } else {
-  console.error();("ERROR: Token not found in .env file! Make sure you have the token correct");
+  console.error();
+  ("ERROR: Token not found in .env file! Make sure you have the token correct");
 }

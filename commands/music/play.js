@@ -20,7 +20,12 @@ module.exports = {
     if (player.playing && player.queue.current) {
       player.queue.add(res.tracks[0]);
       message.react("👌");
-      return message.reply(`Added \`${res.tracks[0].title}\` to Queue`);
+      const addedToQueueEmbed = new MessageEmbed()
+        .setDescription(
+          `Queued [${res.tracks[0].title}](${res.tracks[0].uri}) [<@${res.tracks[0].requester.id}>]`
+        )
+        .setColor("#2DDBE2");
+      return message.channel.send(addedToQueueEmbed);
     }
     player.connect();
     // if (!player.playing && !player.paused && !player.queue.size) player.play();

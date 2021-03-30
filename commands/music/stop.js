@@ -31,7 +31,7 @@ module.exports = {
     player.destroy();
     const StopedEmbed = new MessageEmbed()
       .setColor("BLUE")
-      .setDescription("🥺 Stopped playing music");
+      .setDescription("Stopped playing music");
     return message.channel.send(StopedEmbed);
   },
 };
