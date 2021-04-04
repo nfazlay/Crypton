@@ -1,64 +1,68 @@
 const { MessageEmbed } = require("discord.js");
-const ms = require("ms");
+/* eslint-disable */
 
 module.exports = {
   name: "play",
-  description: "Plays the Entered Song In Vc you are connected to.",
+  aliases: ["p", "ply"],
   guildOnly: true,
-  aliases: ["p"],
   run: async (message, args) => {
-    const res = await message.client.manager.search(
-      args.join(" "),
-      message.author
-    );
+    const { channel } = message.member.voice;
+
+    if (!channel) return message.reply("you need to join a voice channel.");
+    if (!args.length)
+      return message.reply("you need to give me a URL or a search term.");
 
     const player = message.client.manager.create({
       guild: message.guild.id,
-      voiceChannel: message.member.voice.channel.id,
+      voiceChannel: channel.id,
       textChannel: message.channel.id,
     });
-    if (player.playing && player.queue.current) {
-      player.queue.add(res.tracks[0]);
-      message.react("👌");
-      const addedToQueueEmbed = new MessageEmbed()
-        .setDescription(
-          `Queued [${res.tracks[0].title}](${res.tracks[0].uri}) [<@${res.tracks[0].requester.id}>]`
-        )
-        .setColor("#2DDBE2");
-      return message.channel.send(addedToQueueEmbed);
-    }
-    player.connect();
-    // if (!player.playing && !player.paused && !player.queue.size) player.play();
-    message.react("👌");
-    player.play(res.tracks[0]);
-    const playingEmbed = new MessageEmbed()
-      .setAuthor("Crypton Music")
-      .setColor("#00ffff")
-      .setTitle(`${res.tracks[0].title}`)
-      .setThumbnail(res.tracks[0].thumbnail)
-      .setURL(res.tracks[0].uri)
-      .setFooter(`Req. by ${message.author.tag}`)
-      .addFields(
-        {
-          name: "Author:",
-          value: res.tracks[0].author,
-          inline: true,
-        },
-        {
-          name: "Duration:",
-          value: ms(res.tracks[0].duration),
-          inline: true,
-        }
-      );
-    message.channel.send(playingEmbed);
 
-    //work in progress
-    // if (!player.playing && !player.paused && !player.queue.size) player.play();
-    // if (
-    //   !player.playing &&
-    //   !player.paused &&
-    //   player.queue.totalSize === res.tracks.length
-    // )
-    //   player.play();
+    if (player.state !== "CONNECTED") player.connect();
+
+    const search = args.join(" ");
+    let res;
+
+    try {
+      res = await player.search(search, message.author);
+      if (res.loadType === "LOAD_FAILED") {
+        if (!player.queue.current) player.destroy();
+        throw res.exception;
+      }
+    } catch (err) {
+      return message.reply(
+        `there was an error while searching: ${err.message}`
+      );
+    }
+    const noResultsEmbed = new MessageEmbed()
+      .setColor("RED")
+      .setDescription("There Were No Tracks Found, Please Try again.");
+    switch (res.loadType) {
+      case "NO_MATCHES":
+        if (!player.queue.current) player.destroy();
+        return message.channel.send(noResultsEmbed);
+      case "TRACK_LOADED":
+        player.queue.add(res.tracks[0]);
+
+        if (!player.playing && !player.paused && !player.queue.size)
+          player.play();
+        return message.reply(`enqueuing \`${res.tracks[0].title}\`.`);
+      case "PLAYLIST_LOADED":
+        player.queue.add(res.tracks);
+
+        if (
+          !player.playing &&
+          !player.paused &&
+          player.queue.totalSize === res.tracks.length
+        )
+          player.play();
+        return message.reply(
+          `enqueuing playlist \`${res.playlist.name}\` with ${res.tracks.length} tracks.`
+        );
+      case "SEARCH_RESULT":
+        player.queue.add(res.tracks[0]);
+        if (!player.playing && !player.paused && !player.queue.size)
+          player.play();
+    }
   },
 };

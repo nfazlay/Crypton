@@ -1,3 +1,4 @@
+const { version } = require("../package.json");
 module.exports = {
   name: "ready",
   once: true,
@@ -9,11 +10,15 @@ module.exports = {
       const statusArray = [
         {
           text: `:Help in ${client.guilds.cache.size} guilds with ${client.users.cache.size} users!`,
-          type: "PLAYING",
+          type: "WATCHING",
         },
         {
           text: "Crypton Music",
           type: "LISTENING",
+        },
+        {
+          text: `Version ${version}`,
+          type: "PLAYING",
         },
       ];
       const status = Math.floor(Math.random() * statusArray.length);

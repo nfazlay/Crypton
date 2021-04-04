@@ -47,7 +47,7 @@ module.exports = {
     const queueEmbed = new discord.MessageEmbed()
       .setAuthor("Crypton Music Queue")
       .setTitle(queueinfo)
-      .setThumbnail(currentSong.thumbnail)
+      .setThumbnail(currentSong.displayThumbnail("maxresdefault"))
       .setColor("#00ffff")
       .setDescription(`${nowPlaying}\n **Coming Next  :**\n\n${queueTracks}`)
       .setFooter(`Volume: ${player.volume}`);

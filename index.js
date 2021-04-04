@@ -5,7 +5,7 @@ const discord = require("discord.js");
 const fs = require("fs");
 const mongoose = require("mongoose");
 const { Manager } = require("erela.js");
-
+const ms = require("ms");
 /* The client object */
 const client = new discord.Client();
 
@@ -36,9 +36,26 @@ client.manager = new Manager({
   )
   .on("trackStart", (player, track) => {
     const channel = client.channels.cache.get(player.textChannel);
-    channel.send(
-      `Now playing: \`${track.title}\`, requested by \`${track.requester.tag}\`.`
-    );
+    const playingEmbed = new discord.MessageEmbed()
+      .setAuthor("Crypton Music")
+      .setColor("#2DDBE2")
+      .setTitle(`${track.title}`)
+      .setThumbnail(track.displayThumbnail("maxresdefault"))
+      .setURL(track.uri)
+      .setFooter(`Req. by ${track.requester.tag}`)
+      .addFields(
+        {
+          name: "Author:",
+          value: track.author,
+          inline: true,
+        },
+        {
+          name: "Duration:",
+          value: ms(track.duration),
+          inline: true,
+        }
+      );
+    channel.send(playingEmbed);
   })
   //eslint-disable-next-line
   .on("trackEnd", (player, track, payload) => {
@@ -49,6 +66,7 @@ client.manager = new Manager({
     channel.send("Queue has ended.");
     player.destroy();
   });
+
 /* Mongo DB connection */
 if (process.env.MONGO_CONNECTION_URL) {
   mongoose.connect(process.env.MONGO_CONNECTION_URL, {

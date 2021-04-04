@@ -242,7 +242,7 @@ module.exports = {
     }
     /* If everything is correct run the command and catch errors */
     try {
-      command.run(message, args);
+      command.run(message, args, prefix);
     } catch (error) {
       message.channel.send("An error occured!");
     }

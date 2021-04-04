@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/Crypton-Technologies/Crypton#readme",
   "dependencies": {
-    "@raflymln/musixmatch-lyrics": "^1.0.1",
     "axios": "^0.21.1",
     "canvacord": "^5.1.0",
     "discord-canvas": "^1.4.1",

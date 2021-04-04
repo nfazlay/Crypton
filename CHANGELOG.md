@@ -5,41 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.6] - 2021/03/22
+## [1.1.9] - 2021/04/04 [LATEST]
 
 ### Added
 
-- Developer only commands
-- changelog.md
-- Some Music Commands for Next version
+- Music Error Handler
+- Search Command (Music)
+- Some more Staus to Bot activity
+- players command (dev only)
 
 ### Changed
 
-- Replaced All Music messages into Embeds
-- Switched to Changing Bot's Activity
-
-## [1.1.7] - 2021/03/24
-
-### Added
-
-- Clear, Shuffle Music Commands
-- Unfinshed YT notifications (testing)
-
-### Changed
-
-- Auto Bot Activity Change to 30 mins
-
-### Removed
-
-- skipto/seek command
-- Dev Only Commands
+- Refactored Changelog.md
+- Passing prefix through command handler
+- embed thumbnails to 'maxresdefault' in Music Commands
 
 ### Fixed
 
-- Music Not Playing Bug
-- Gap While adding songs to queue
+- Ban Command Bugs (not complete Fix)
 
-## [1.1.8] - 2021/03/25
+### Removed
+
+- warn command (tempoary)
+
+## [1.1.8] - 2021/03/30
 
 ### Added
 
@@ -64,3 +53,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Emoji from Stop Command (Music)
+
+## [1.1.7] - 2021/03/24
+
+### Added
+
+- Clear, Shuffle Music Commands
+- Unfinshed YT notifications (testing)
+
+### Changed
+
+- Auto Bot Activity Change to 30 mins
+
+### Removed
+
+- skipto/seek command
+- Dev Only Commands
+
+### Fixed
+
+- Music Not Playing Bug
+- Gap While adding songs to queue
+
+## [1.1.6] - 2021/03/22
+
+### Added
+
+- Developer only commands
+- changelog.md
+- Some Music Commands for Next version
+
+### Changed
+
+- Replaced All Music messages into Embeds
+- Switched to Changing Bot's Activity

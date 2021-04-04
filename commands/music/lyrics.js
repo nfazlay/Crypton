@@ -1,40 +1,25 @@
 /* eslint-disable */
 const axios = require("axios");
-const MusicxMatch = require("@raflymln/musixmatch-lyrics");
 const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "lyrics",
   run: async (message, args) => {
-    // const API_URL = `https://api.musixmatch.com/ws/1.1/`;
-    // axios
-    //   .get(API_URL, {
-    //     params: {
-    //       format: "jsonp",
-    //       callback: "callback",
-    //       q_track: "no idea",
-    //     },
-    //     Headers: {
-    //       Authorization: "dd8caa76e9a518faa23ec843b32abf22",
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(JSON.stringify(res.data));
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
-    // let res;
-    // res = await MusicxMatch.find(args.join(" "));
-    // // console.log(res);
-    // const lyricsEmbed = new MessageEmbed()
-    //   .setDescription(res.lyrics)
-    //   .setColor("#2DDBE2")
-    //   .setThumbnail(res.albumImg)
-    //   .setTitle(`${res.title} - ${res.artists}`)
-    //   .setURL(res.url)
-    //   .setAuthor("Crypton Lyrics");
-    // console.log(res);
-    // message.channel.send(lyricsEmbed);
+    // const songName = args.join("%20");
+    // const songIdApiUri = `https://api.genius.com/search?q=${songName}`;
+    // const headers = {
+    //   Authorization:
+    //     "Bearer " +
+    //     "V6KhN21HTGzTSKLupxxcCbGxnfU8gPL1seiHln5MuqSP6spFk_SH9-0j3zbmY0Ft",
+    // };
+    // const { data } = await axios.get(songIdApiUri, { headers });
+    // const { hits } = data.response;
+    // console.log(hits[0]);
+    // const songID = hits[0].result.id;
+    // const lyricsApiUri = `https://api.genius.com/songs/${songID}`;
+
+    // const { data: lyricsData } = await axios.get(lyricsApiUri, { headers });
+    // console.log(lyricsData);
+    // console.log(data);
     const LyricsEmbed = new MessageEmbed()
       .setColor("BLUE")
       .setDescription(
