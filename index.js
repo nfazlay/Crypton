@@ -5,15 +5,15 @@ const discord = require("discord.js");
 /* The client object */
 const client = new discord.Client();
 /* commandHandler */
-require("./scripts/commandHandler.js").config(client);
+require("./handlers/commandHandler.js").config(client);
 /* eventHandler */
-require("./scripts/eventHandler.js").config(client);
+require("./handlers/eventHandler.js").config(client);
 /* databaseHandler */
-require("./scripts/databaseHandler.js").config();
+require("./handlers/databaseHandler.js").config();
 /* errorHandler */
-require("./scripts/errorHandler.js").config();
+require("./handlers/errorHandler.js").config();
 /* musicHandler */
-require("./scripts/musicHandler.js").config(client);
+require("./handlers/musicHandler.js").config(client);
 // /* Log-in the client using super secret token if any*/
 if (process.env.TOKEN) {
   client.login(process.env.TOKEN);
