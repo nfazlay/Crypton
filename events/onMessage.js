@@ -1,6 +1,5 @@
 /* Librarys that we will be using */
 const discord = require("discord.js");
-const stringSimilarity = require("string-similarity");
 /* Prefix Model */
 const prefixDb = require("../models/modelPrefix");
 const rankingDb = require("../models/modelRanking");
@@ -138,27 +137,7 @@ module.exports = {
         (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
       );
     /* Check if command exists */
-    if (!command) {
-      const closestCommand = stringSimilarity.findBestMatch(
-        commandName,
-        client.rawArray
-      );
-      let reply;
-      if (closestCommand.bestMatchIndex >= 40) {
-        const closestEmbed = new discord.MessageEmbed()
-          .setColor("RED")
-          .setTitle("Command not found")
-          .setFooter(`${closestCommand.bestMatchIndex}% match`)
-          .setTimestamp()
-          .addField("Did you mean", closestCommand.bestMatch.target, true);
-        reply = closestEmbed;
-      } else {
-        reply = "Command not found";
-      }
-      return message.channel
-        .send(reply)
-        .then((msg) => msg.delete({ timeout: 2000 }));
-    }
+    if (!command) return;
     /* Check if command can run in channel */
     if (disableData && disableData.disabledChannels) {
       if (
@@ -218,17 +197,18 @@ module.exports = {
     }
     if (command.devOnly) {
       if (message.author.bot) return;
-      const developers = [
-        "769195469363740682",
-        "495911486217125909",
-        "681109798259130379",
-      ];
-      for (let i; i < developers.length; i++) {
-        if (message.author.id !== developers[i]) {
-          message.reply(
-            "This Command Can only be used by Developers of the Bot!"
-          );
+      const developers = [];
+      client.fetchApplication().then(data => {
+        if (data.owner.id) {
+          developers.push(data.owner.id);
+        } else if (!data.owner.id) {
+          data.owner.members.forEach(member => {
+            developers.push(member.id);
+          });
         }
+      });
+      if (!developers.find(element => element === message.author.id)) {
+        return;
       }
     }
     /* If command needs arguments check if user gave them */
