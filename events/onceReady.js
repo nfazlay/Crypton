@@ -3,8 +3,6 @@ module.exports = {
   name: "ready",
   once: true,
   run: (client) => {
-    //initialzes Music
-    client.manager.init(client.user.id);
 
     const randomStaus = () => {
       const statusArray = [

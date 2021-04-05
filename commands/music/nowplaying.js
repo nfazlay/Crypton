@@ -10,7 +10,7 @@ module.exports = {
     const LyricsEmbed = new MessageEmbed()
       .setColor("BLUE")
       .setDescription(
-        `Under Development | Raise Ticket [here](https://discord.gg/fRVtnW8kY8) for Faster Development`
+        "Under Development | Raise Ticket [here](https://discord.gg/fRVtnW8kY8) for Faster Development"
       );
 
     message.channel.send(LyricsEmbed);

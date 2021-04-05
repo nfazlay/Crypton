@@ -1,6 +1,6 @@
 module.exports =
 {
-	name: "SupportServer",
+	name: "Support",
 	description: "Help server",
 	cooldown: 3,
 	run: async(message) => {

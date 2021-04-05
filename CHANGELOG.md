@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.9] - 2021/04/04 [LATEST]
 
 ### Added
-
+- The whole bot was made modular
 - Music Error Handler
 - Search Command (Music)
 - Some more Staus to Bot activity
