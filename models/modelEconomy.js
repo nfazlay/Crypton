@@ -5,6 +5,7 @@ const economySchema = new mongoose.Schema({
     cash: Number,
     level: Number,
     workingAs: String,
+    stonks: Array,
     inventory: Array,
 	lastWorked: Number,
 	lastRedeemedDaily: Number,

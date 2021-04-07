@@ -40,8 +40,6 @@ module.exports = {
       .setThumbnail(message.guild.iconURL())
       .setDescription(desc);
 
-    message.channel.startTyping();
     message.channel.send(leaderBeardEmbed);
-    message.channel.stopTyping();
   },
 };

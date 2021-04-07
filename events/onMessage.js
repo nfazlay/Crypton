@@ -11,8 +11,8 @@ const cooldowns = new discord.Collection();
 module.exports = {
   name: "message",
   run: async (message, client) => {
-    /* check for DM message and Ignore it */
-    if (message.channel.type === "dm") return;
+    /* Check if message was sent by bot */
+    if (message.author.bot) return;
     /* Get the disabled info data */
     const disableData = await disabledDb.findOne({
       guildId: message.guild.id,
@@ -37,11 +37,8 @@ module.exports = {
         );
       }
     }
-    /* checking weather message is only prefix (fix for bug command not found if message
-      contains prefix only*/
-    if (message.content === prefix) return;
     /* Check if word is banned if it is then delete */
-    if (disableData && disableData.disabledWords) {
+    if (disableData && disableData.disabledWords && !message.member.hasPermission("MANAGE_GUILD")) {
       for (let i = 0; i < disableData.disabledWords.length; i++) {
         const element = disableData.disabledWords[i];
         for (
@@ -56,7 +53,7 @@ module.exports = {
             !message.channel.permissionsFor(message.author).has("MANAGE_GUILD")
           ) {
             message.channel
-              .send("That word is not allowed!")
+              .send("You can't use that word here!")
               .then((msg) => msg.delete({ timeout: 5000 }));
             message.delete();
             return;
@@ -64,16 +61,10 @@ module.exports = {
         }
       }
     }
-    /* Check if message was sent by bot */
-    if (message.author.bot) return;
-    /* Check if message starts with prefix */
+    /* Check if message doesn't starts with prefix */
     if (!message.content.startsWith(prefix)) {
-      if (disableData && disableData.disabledSpecials) {
-        if (
-          disableData.disabledSpecials.find(
-            (element) => element.Ranking === false
-          )
-        ) {
+      if (disableData && disableData.disabledCategories) {
+        if (disableData.disabledCategories.find(element => element === "leveling")) {
           return;
         }
       }
@@ -142,7 +133,7 @@ module.exports = {
     if (disableData && disableData.disabledChannels) {
       if (
         disableData.disabledChannels.find(
-          (element) => element.channelId === message.channel.id
+          (element) => element === message.channel.id
         )
       ) {
         return message.reply("This channel is disabled for all commands");
@@ -187,12 +178,8 @@ module.exports = {
     }
     if (command.requiresDb) {
       if (!process.env.MONGO_CONNECTION_URL) {
-        message.channel.send(
-          "Database connection has not been setted up, please contact the bot owner if the problem ouccurs again"
-        );
-        console.error(
-          "Mongo db compass url was not found in .env file make sure you have a compass URL"
-        );
+        message.channel.send("Database connection has not been setted up, please contact the bot owner if the problem ouccurs again");
+        console.error("Mongo db compass url was not found in .env file make sure you have a compass URL");
       }
     }
     if (command.devOnly) {

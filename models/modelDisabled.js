@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const disabledSchema = new mongoose.Schema({
 	guildId: String,
 	disabledChannels: Array,
-	disabledSpecials: Array,
+	disabledCategories: Array,
+	disabledCommands: Array,
 	disabledWords: Array,
 });
 

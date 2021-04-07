@@ -7,6 +7,11 @@ function config() {
             useUnifiedTopology: true,
             useFindAndModify: false,
         });
+    } else {
+      console.log(
+        `MongoDb connection was asked but URL was not provided in .env
+        please provide a MongoDb compass URL or remove the intent Bot will now quit`);
+        process.exit(1);
     }
 }
 
