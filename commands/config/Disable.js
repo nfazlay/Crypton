@@ -1,8 +1,8 @@
 const disableDb = require("../../models/modelDisabled");
 
 module.exports = {
-	name: "DisableChannel",
-	description: "Disable a channel!",
+	name: "Disable",
+	description: "Disable something",
 	args: true,
 	usage: "#ChannelMention",
 	guildOnly: true,
