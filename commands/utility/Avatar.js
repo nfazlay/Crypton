@@ -10,6 +10,7 @@ module.exports = {
 		const embed = new discord.MessageEmbed()
 			.setColor("#0099ff")
 			.setTitle(`${user.username}`)
+			.setDescription("Looking good today!")
 			.setURL(user.displayAvatarURL())
 			.setImage(user.displayAvatarURL({ format: "png", dynamic: true, size: 4096 }));
 
