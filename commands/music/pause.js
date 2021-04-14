@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 module.exports = {
   name: "pause",
   description: "Pauses The playing Song",
@@ -36,7 +38,7 @@ module.exports = {
     await message.react("⏸️");
     player.pause(true);
     const PausedEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription("Music Has Been Paused!");
     return message.channel.send(PausedEmbed);
   },

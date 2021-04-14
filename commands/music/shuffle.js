@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 module.exports = {
   name: "shuffle",
   run: (message) => {
@@ -41,7 +43,7 @@ module.exports = {
     message.react("🔀");
     queue.shuffle();
     const shuffledQueueEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription("Shuffled The Queue");
     message.channel.send(shuffledQueueEmbed);
   },

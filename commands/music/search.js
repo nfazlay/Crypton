@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 /* eslint-disable */
 
 module.exports = {
@@ -108,8 +110,15 @@ module.exports = {
           );
 
         const track = res.tracks[index];
-        player.queue.add(track);
-
+        await player.queue.add(track);
+        if (player.queue.current && player.playing) {
+          const queueE = new MessageEmbed()
+            .setColor(ui.musicEmbedsColor)
+            .setDescription(
+              `Queued [${res.tracks[0].title}](${res.tracks[0].uri}) [<@${res.tracks[0].requester.id}>]`
+            );
+          message.channel.send(queueE);
+        }
         if (!player.playing && !player.paused && !player.queue.size)
           player.play();
       // return message.reply(`enqueuing \`${track.title}\`.`);

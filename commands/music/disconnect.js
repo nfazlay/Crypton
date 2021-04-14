@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
 
 module.exports = {
   name: "disconnect",
@@ -28,7 +29,7 @@ module.exports = {
 
     await message.react("👋");
     const disconnectEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription("See you soon!");
     message.channel.send(disconnectEmbed);
 

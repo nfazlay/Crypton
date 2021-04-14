@@ -1,3 +1,5 @@
+const { ui } = require("../../json/defaults.json");
+
 const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "clearqueue",
@@ -44,7 +46,7 @@ module.exports = {
     const queueSize = queue.size;
     queue.clear();
     const clearedQueueEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription(`Cleared ${queueSize} Songs From Queue.`);
     message.channel.send(clearedQueueEmbed);
   },

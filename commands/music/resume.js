@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 module.exports = {
   name: "resume",
   description: "Resumes the Paused Song",
@@ -36,7 +38,7 @@ module.exports = {
     await message.react("▶️");
     player.pause(false);
     const ResumedEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription("Music Has Been Resumed!");
     return message.channel.send(ResumedEmbed);
   },

@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 module.exports = {
   name: "skip",
   description: "Skips the current song to next one",
@@ -44,7 +46,7 @@ module.exports = {
     await message.react("⏭️");
     player.stop();
     const SkippedEmbed = new MessageEmbed()
-      .setColor("BLUE")
+      .setColor(ui.musicEmbedsColor)
       .setDescription(`Skipped [${title}](${uri})`);
     return message.channel.send(SkippedEmbed);
   },

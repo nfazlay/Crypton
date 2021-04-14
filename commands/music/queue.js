@@ -1,5 +1,6 @@
 const discord = require("discord.js");
 const ms = require("ms");
+const { ui } = require("../../json/defaults.json");
 
 module.exports = {
   name: "queue",
@@ -48,7 +49,7 @@ module.exports = {
       .setAuthor("Crypton Music Queue")
       .setTitle(queueinfo)
       .setThumbnail(currentSong.displayThumbnail("maxresdefault"))
-      .setColor("#00ffff")
+      .setColor(ui.musicEmbedsColor)
       .setDescription(`${nowPlaying}\n **Coming Next  :**\n\n${queueTracks}`)
       .setFooter(`Volume: ${player.volume}`);
 

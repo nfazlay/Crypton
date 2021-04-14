@@ -5,9 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.9] - 2021/04/04 [LATEST]
+## [1.2.0] - 2021/04/11 [LATEST]
 
 ### Added
+
+- spotify support to Crypton Music
+- Bug report command
+
+## Updated
+
+- Added math to volume command (music)
+- Embed colors in Music Commands(made to transparent)
+- Handlers(made it modular)
+- Refactored Commands Directory
+
+## Removed
+
+- Lavalink.jar (Connected to remote server)
+
+## [1.1.9] - 2021/04/04
+
+### Added
+
 - The whole bot was made modular
 - Music Error Handler
 - Search Command (Music)

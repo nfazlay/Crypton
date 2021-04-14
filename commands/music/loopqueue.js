@@ -1,3 +1,5 @@
+const { ui } = require("../../json/defaults.json");
+
 const { MessageEmbed } = require("discord.js");
 module.exports = {
   name: "loopqueue",
@@ -30,14 +32,14 @@ module.exports = {
     if (args[0] === "yes") {
       player.setQueueRepeat(true);
       const StartedLoopingQueueEmbed = new MessageEmbed()
-        .setColor("BLUE")
+        .setColor(ui.musicEmbedsColor)
         .setDescription("Looping The Whole Queue Now");
       return message.channel.send(StartedLoopingQueueEmbed);
     }
     if (args[0] === "no") {
       player.setQueueRepeat(false);
       const StoppedLoopingQueueEmbed = new MessageEmbed()
-        .setColor("BLUE")
+        .setColor(ui.musicEmbedsColor)
         .setDescription("Stopped Looping The Whole Queue");
       return message.channel.send(StoppedLoopingQueueEmbed);
     }

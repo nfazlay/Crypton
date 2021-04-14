@@ -1,4 +1,5 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
 /* eslint-disable */
 
 module.exports = {
@@ -43,13 +44,28 @@ module.exports = {
         return message.channel.send(noResultsEmbed);
       case "TRACK_LOADED":
         player.queue.add(res.tracks[0]);
-
+        if (player.queue.current) {
+          const queuedEmbed = new MessageEmbed()
+            .setColor(ui.musicEmbedsColor)
+            .setDescription(
+              `Queued [${res.tracks[0].title}](${res.tracks[0].uri}) [<@${res.tracks[0].requester.id}>]`
+            );
+          message.channel.send(queuedEmbed);
+        }
         if (!player.playing && !player.paused && !player.queue.size)
           player.play();
-        return message.reply(`enqueuing \`${res.tracks[0].title}\`.`);
+
+      // return message.reply(`enqueuing \`${res.tracks[0].title}\`.`);
       case "PLAYLIST_LOADED":
         player.queue.add(res.tracks);
-
+        if (player.queue.current) {
+          const addedQueueEmbed = new MessageEmbed()
+            .setColor(ui.musicEmbedsColor)
+            .setDescription(
+              `Queued ${res.tracks.length} Tracks from [${res.playlist.name}](${res.playlist.uri}) Plylist`
+            );
+          message.channel.send(addedQueueEmbed);
+        }
         if (
           !player.playing &&
           !player.paused &&
@@ -61,6 +77,16 @@ module.exports = {
         );
       case "SEARCH_RESULT":
         player.queue.add(res.tracks[0]);
+        // console.log("search res");
+        if (player.queue.current && player.playing) {
+          const queueE = new MessageEmbed()
+            .setColor(ui.musicEmbedsColor)
+            .setDescription(
+              `Queued [${res.tracks[0].title}](${res.tracks[0].uri}) [<@${res.tracks[0].requester.id}>]`
+            );
+          message.channel.send(queueE);
+        }
+
         if (!player.playing && !player.paused && !player.queue.size)
           player.play();
     }

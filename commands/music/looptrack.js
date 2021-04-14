@@ -1,4 +1,6 @@
 const { MessageEmbed } = require("discord.js");
+const { ui } = require("../../json/defaults.json");
+
 module.exports = {
   name: "looptrack",
   description: "Loops The Current Playing Song",
@@ -38,14 +40,14 @@ module.exports = {
       player.setTrackRepeat(true);
       message.react("🔁");
       const StartedLoopingTrackEmbed = new MessageEmbed()
-        .setColor("BLUE")
+        .setColor(ui.musicEmbedsColor)
         .setDescription(`Looping The Track [${title}](${uri})`);
       return message.channel.send(StartedLoopingTrackEmbed);
     }
     if (args[0] === "no") {
       player.setTrackRepeat(false);
       const StoppedLoopingTrackEmbed = new MessageEmbed()
-        .setColor("BLUE")
+        .setColor(ui.musicEmbedsColor)
         .setDescription(`Stopped Looping The Track [${title}](${uri})`);
       return message.channel.send(StoppedLoopingTrackEmbed);
     }

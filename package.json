@@ -1,6 +1,6 @@
 {
   "name": "crypton",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "A discord bot made in JS with discord.js library",
   "main": "index.js",
   "directories": {
@@ -17,6 +17,7 @@
   },
   "keywords": [
     "discord-bot",
+    "discord.js",
     "crypton-bot"
   ],
   "author": "Crypton-Technologies",
@@ -32,6 +33,7 @@
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "erela.js": "^2.3.2",
+    "erela.js-spotify": "^1.2.0",
     "eslint": "^7.21.0",
     "mongoose": "^5.11.18",
     "ms": "^2.1.3"

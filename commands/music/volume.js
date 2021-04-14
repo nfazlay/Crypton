@@ -34,19 +34,55 @@ module.exports = {
       message.channel.send(CurrentVolumeEmbed);
       return;
     }
+    const volumeChecker = (volume) => {
+      if (!volume || volume < 1 || volume > 100) {
+        const EnterVolumeBW1And100Embed = new MessageEmbed()
+          .setColor("RED")
+          .setDescription("Please give a Volume between 1 and 100");
+        return message.channel.send(EnterVolumeBW1And100Embed);
+      }
+    };
+    const volSet = () => {
+      const volumeSetToEmbed = new MessageEmbed()
+        .setColor("BLUE")
+        .setDescription(`Queue Volume Set to **${player.volume}**`);
+      message.channel.send(volumeSetToEmbed);
+    };
+    if (args[0].startsWith("+")) {
+      const volString = args[0].replace("+", "");
+      volumeChecker(Number(volString));
+      const vol = player.volume + Number(volString);
+      if (!vol || vol < 1 || vol > 100) {
+        const EnterVolumeBW1And100Embed = new MessageEmbed()
+          .setColor("RED")
+          .setDescription("Please give a Volume between 1 and 100");
+        return message.channel.send(EnterVolumeBW1And100Embed);
+      }
+      player.setVolume(vol);
+      return volSet();
+    }
+    if (args[0].startsWith("-")) {
+      const volString = args[0].replace("-", "");
+      volumeChecker(Number(volString));
+      const vol = player.volume - Number(volString);
+      if (!vol || vol < 1 || vol > 100) {
+        const EnterVolumeBW1And100Embed = new MessageEmbed()
+          .setColor("RED")
+          .setDescription("Please give a Volume between 1 and 100");
+        return message.channel.send(EnterVolumeBW1And100Embed);
+      }
+      player.setVolume(vol);
+      return volSet();
+    }
+
     const volume = Number(args[0]);
     if (!volume || volume < 1 || volume > 100) {
       const EnterVolumeBW1And100Embed = new MessageEmbed()
         .setColor("RED")
         .setDescription("Please give a Volume between 1 and 100");
-      message.channel.send(EnterVolumeBW1And100Embed);
-
-      return;
+      return message.channel.send(EnterVolumeBW1And100Embed);
     }
     await player.setVolume(volume);
-    const volumeSetToEmbed = new MessageEmbed()
-      .setColor("BLUE")
-      .setDescription(`Queue Volume Set to **${player.volume}**`);
-    message.channel.send(volumeSetToEmbed);
+    return volSet();
   },
 };
