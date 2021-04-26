@@ -78,7 +78,7 @@ module.exports = {
       case "SEARCH_RESULT":
         player.queue.add(res.tracks[0]);
         // console.log("search res");
-        if (player.queue.current && player.playing) {
+        if (player.playing) {
           const queueE = new MessageEmbed()
             .setColor(ui.musicEmbedsColor)
             .setDescription(
