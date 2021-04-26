@@ -37,11 +37,16 @@ Crypton is also available as a easy to use quick setup application that you can 
 
 # Hosting
 
-You can host on any platform, or server as of the code base it's compataible (can run) on the following:
-• Heroku (with Procfile)
-• Glitch 
-• Repl.it
-• Game panels using pterodactyl daemons (However this might change according to provider)
+Other than self-hosting you can use the following providers:
+
+• Heroku + Procfile
+
+• Glitch
+
+• Repl.it + .replit
+
+• Falixnodes
+
 
 # Contributing
 See [Contributing.md](https://github.com/crypton-technologies/crypton/contributing.md)
