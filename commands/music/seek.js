@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 module.exports = {
-  name: "shuffle",
+  name: "seek",
   run: (message) => {
     // const player = message.client.manager.get(message.guild.id);
     // const position = Number(args[0]);

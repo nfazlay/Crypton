@@ -3,6 +3,7 @@ const { ui } = require("../../json/defaults.json");
 
 module.exports = {
   name: "shuffle",
+  description: "Shuffles the queue Randomly",
   run: (message) => {
     const player = message.client.manager.get(message.guild.id);
     if (!player) {

@@ -58,12 +58,12 @@ module.exports = {
       // return message.reply(`enqueuing \`${res.tracks[0].title}\`.`);
       case "PLAYLIST_LOADED":
         player.queue.add(res.tracks);
-        if (player.queue.current) {
-          const addedQueueEmbed = new MessageEmbed()
-            .setColor(ui.musicEmbedsColor)
-            .setDescription(
-              `Queued ${res.tracks.length} Tracks from [${res.playlist.name}](${res.playlist.uri}) Plylist`
-            );
+        const addedQueueEmbed = new MessageEmbed()
+          .setColor(ui.musicEmbedsColor)
+          .setDescription(
+            `Queued ${res.tracks.length} Tracks from [${res.playlist.name}](${res.playlist.uri}) Plylist`
+          );
+        if (player.queue.current && player.playing) {
           message.channel.send(addedQueueEmbed);
         }
         if (
@@ -72,13 +72,11 @@ module.exports = {
           player.queue.totalSize === res.tracks.length
         )
           player.play();
-        return message.reply(
-          `enqueuing playlist \`${res.playlist.name}\` with ${res.tracks.length} tracks.`
-        );
+        return message.channel.send(addedQueueEmbed);
       case "SEARCH_RESULT":
         player.queue.add(res.tracks[0]);
         // console.log("search res");
-        if (player.playing) {
+        if (player.playing && player.queue.current) {
           const queueE = new MessageEmbed()
             .setColor(ui.musicEmbedsColor)
             .setDescription(

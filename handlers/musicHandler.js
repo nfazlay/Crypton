@@ -3,9 +3,8 @@ const ms = require("ms");
 const discord = require("discord.js");
 const Spotify = require("erela.js-spotify");
 
-const clientID = "3f76a40c03c7428a887aa9c87c43de64";
-const clientSecret = "358d8f68148947058129f35677bb9e73";
-
+const clientID = process.env.SPOTIFY_CLIENT_ID;
+const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 function config(client) {
   /* Music Configuration */
   client.manager = new Manager({

@@ -13,6 +13,7 @@ module.exports = {
   run: async (message, client) => {
     /* Check if message was sent by bot */
     if (message.author.bot) return;
+
     /* Get the disabled info data */
     const disableData = await disabledDb.findOne({
       guildId: message.guild.id,
@@ -37,8 +38,18 @@ module.exports = {
         );
       }
     }
+    /* mention as a prefix */
+    const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const prefixRegex = new RegExp(
+      `^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`
+    );
+
     /* Check if word is banned if it is then delete */
-    if (disableData && disableData.disabledWords && !message.member.hasPermission("MANAGE_GUILD")) {
+    if (
+      disableData &&
+      disableData.disabledWords &&
+      !message.member.hasPermission("MANAGE_GUILD")
+    ) {
       for (let i = 0; i < disableData.disabledWords.length; i++) {
         const element = disableData.disabledWords[i];
         for (
@@ -62,9 +73,23 @@ module.exports = {
       }
     }
     /* Check if message doesn't starts with prefix */
-    if (!message.content.startsWith(prefix)) {
+    let matchedPrefix;
+    try {
+      const [, mp] = message.content.match(prefixRegex);
+      if (mp) {
+        matchedPrefix = mp;
+      }
+    } catch (e) {
+      null;
+    }
+
+    if (!prefixRegex.test(message.content)) {
       if (disableData && disableData.disabledCategories) {
-        if (disableData.disabledCategories.find(element => element === "leveling")) {
+        if (
+          disableData.disabledCategories.find(
+            (element) => element === "leveling"
+          )
+        ) {
           return;
         }
       }
@@ -119,7 +144,7 @@ module.exports = {
       return;
     }
     /* Get the argument and command's name from the message */
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     /* Get the command from the collection */
     const command =
@@ -128,7 +153,15 @@ module.exports = {
         (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
       );
     /* Check if command exists */
-    if (!command) return;
+    if (!command) {
+      const noCommandOnlyMentionEmbed = new discord.MessageEmbed()
+        .setAuthor("Crypton Help")
+        .setDescription(
+          `The Prefix For this Server is ${prefix},\nYou can use ${prefix}help to get the list of all commands.`
+        )
+        .setColor(3092790);
+      return message.channel.send(noCommandOnlyMentionEmbed);
+    }
     /* Check if command can run in channel */
     if (disableData && disableData.disabledChannels) {
       if (
@@ -178,23 +211,27 @@ module.exports = {
     }
     if (command.requiresDb) {
       if (!process.env.MONGO_CONNECTION_URL) {
-        message.channel.send("Database connection has not been setted up, please contact the bot owner if the problem ouccurs again");
-        console.error("Mongo db compass url was not found in .env file make sure you have a compass URL");
+        message.channel.send(
+          "Database connection has not been setted up, please contact the bot owner if the problem ouccurs again"
+        );
+        console.error(
+          "Mongo db compass url was not found in .env file make sure you have a compass URL"
+        );
       }
     }
     if (command.devOnly) {
       if (message.author.bot) return;
       const developers = [];
-      client.fetchApplication().then(data => {
+      client.fetchApplication().then((data) => {
         if (data.owner.id) {
           developers.push(data.owner.id);
         } else if (!data.owner.id) {
-          data.owner.members.forEach(member => {
+          data.owner.members.forEach((member) => {
             developers.push(member.id);
           });
         }
       });
-      if (!developers.find(element => element === message.author.id)) {
+      if (!developers.find((element) => element === message.author.id)) {
         return;
       }
     }
