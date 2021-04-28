@@ -12,12 +12,13 @@ module.exports = {
 		const { categories } = message.client;
 		const embed = new discord.MessageEmbed();
 		const data = [];
+                let prefix = process.env.PREFIX;
 		const prefixData = await prefixDb.findOne({
 			guildId: message.guild.id,
 		});
-
-		const prefix = prefixData.prefix || process.env.PREFIX;
-
+                if (prefixData) {
+                    prefix = prefixData.prefix;
+                }
 		if (!args.length) {
 			data.push(
 				"Here's all my command categories:\n\n •" + categories.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n •")
