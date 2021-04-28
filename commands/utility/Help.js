@@ -36,8 +36,8 @@ module.exports = {
 		let toFind = args[0].toLowerCase();
 
 		if (categories.has(toFind)) {
-			const commandsOfFolder = categories.get(toFind).map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n");
-			const Categoryembed = new discord.MessageEmbed()
+			const commandsOfFolder = categories.get(toFind).Collection.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n");
+			const CategoryEmbed = new discord.MessageEmbed()
 				.setTitle(toFind[0].toUpperCase() + toFind.substring(1))
 				.setDescription(commandsOfFolder)
 				.setTimestamp()
