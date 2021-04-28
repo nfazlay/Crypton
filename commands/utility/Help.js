@@ -12,14 +12,11 @@ module.exports = {
 		const { categories } = message.client;
 		const embed = new discord.MessageEmbed();
 		const data = [];
-		let prefix = process.env.PREFIX;
-		const prefixData = prefixDb.findOne({
+		const prefixData = await prefixDb.findOne({
 			guildId: message.guild.id,
 		});
 
-		if (prefixData) {
-			prefix = prefixData.prefix;
-		}
+		const prefix = prefixData.prefix || process.env.PREFIX;
 
 		if (!args.length) {
 			data.push(
