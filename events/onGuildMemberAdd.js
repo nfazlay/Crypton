@@ -11,12 +11,12 @@ module.exports = {
 		if (welcomeData) {
 
 			const welcomeCard = new Welcomer()
-			.setColor("BLUE")
-			.setMemberCount(member.guild.memberCount)
-			.setUsername(member.user.username)
-			.setDiscriminator(member.user.discriminator)
-			.setAvatar(member.user.displayAvatarURL({ format: "jpeg" }))
-			.setGuildName(member.guild.name);
+				.setColor("BLUE")
+				.setMemberCount(member.guild.memberCount)
+				.setUsername(member.user.username)
+				.setDiscriminator(member.user.discriminator)
+				.setAvatar(member.user.displayAvatarURL({ format: "jpeg" }))
+				.setGuildName(member.guild.name);
 
 			if (welcomeData.role && member.guild.roles.cache.get(welcomeData.role)) {
 				member.roles.add(welcomeData.role);
@@ -34,7 +34,7 @@ module.exports = {
 				welcomeCard.build().then(async (data) => {
 					const attachment = new discord.MessageAttachment(data, "WelcomeCard.png");
 					member.guild.channels.cache.get(welcomeData.channel).send(attachment);
-			});
+				});
 			}
 		}
 	}

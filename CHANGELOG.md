@@ -5,7 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.1] - 2021/04/14 [LATEST]
+## [1.2.1] - 2021/04/30 [LATEST]
+
+### Added
+
+- Mention as way to know more about bot
+- Image manupulation with errors
+- New works and shop items
+- Indentation
+- .info files for future
+
+### Updated
+
+- Lyrics command finished
+
+### Removed
+
+- Support Commands
+
+## [1.2.1] - 2021/04/14
 
 ### Added
 

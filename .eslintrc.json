@@ -9,6 +9,7 @@
 	},
 	"rules": {
 		"brace-style": ["error", "1tbs", { "allowSingleLine": true }],
+		"indent": ["error","tab"],
 		"comma-dangle": "off",
 		"comma-spacing": "error",
 		"comma-style": "error",

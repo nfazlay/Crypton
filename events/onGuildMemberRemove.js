@@ -13,12 +13,12 @@ module.exports = {
 		if (leaveData) {
 
 			const leaveCard = new Leaver()
-			.setColor("BLUE")
-			.setMemberCount(member.guild.memberCount)
-			.setUsername(member.user.username)
-			.setDiscriminator(member.user.discriminator)
-			.setGuildName(member.guild.name)
-			.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "png" }));
+				.setColor("BLUE")
+				.setMemberCount(member.guild.memberCount)
+				.setUsername(member.user.username)
+				.setDiscriminator(member.user.discriminator)
+				.setGuildName(member.guild.name)
+				.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: "png" }));
 
 			if (leaveData.message && leaveData.channel && member.guild.channels.cache.get(leaveData.channel)) {
 				let msg = leaveData.message;
@@ -33,7 +33,7 @@ module.exports = {
 				leaveCard.build().then(async (data) => {
 					const attachment = new discord.MessageAttachment(data, "LeaveCard.png");
 					member.guild.channels.cache.get(leaveData.channel).send(attachment);
-			});
+				});
 			}
 		}
 	}

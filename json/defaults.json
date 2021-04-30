@@ -5,6 +5,7 @@
   "defaultDailyInterval": 86400000,
   "defaultDailyCash": 500,
   "defaultCashOnWork": 150,
+  "defaultLevelOnWork": 0.25,
   "ui": {
     "musicEmbedsColor": 3092790
   }

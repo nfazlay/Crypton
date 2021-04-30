@@ -1,4 +1,14 @@
 {
+    "Honey": {
+        "price": 50,
+        "useAble": true,
+        "message": "Honey! Thank the bees"
+    },
+    "Joke": {
+        "price": 69,
+        "useAble": true,
+        "message": "Your life."
+    }
     "Juice": {
         "price": 100,
         "useAble": true,
@@ -8,5 +18,22 @@
         "price": 300,
         "useAble": true,
         "message": "Ah pizza, how does it taste?"
+    },
+    "Shoe": {
+        "price": 350,
+        "useAble": true,
+        "message": "So you have worn your shoes now, well intresting.."
+    },
+    "Bitcoin": {
+        "price": 500,
+        "useAble": false,
+        "sellAble": true,
+        "message": "Mining time!!"
+    },
+    "DogeCoin": {
+        "price": 1000,
+        "useAble": false,
+        "sellAble": true,
+        "message": "DOGEEEEE"
     }
 }

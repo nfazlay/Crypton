@@ -1,10 +1,20 @@
 {
     "Youtuber": "1",
     "Gardener": "5",
+    "Washer": "5",
+    "Cleaner": "5",
     "Teacher": "10",
     "Farmer": "10",
+    "Barber": "10",
     "Programmer": "15",
+    "Hacker": "15",
     "Military": "20",
-    "Navy": "25",
-    "President": "30"
+    "Navy": "20",
+    "Weather Office": "25",
+    "Joker": "25",
+    "Detective": "30",
+    "Right Hand": "35",
+    "NASA": "40",
+    "Elon Musk": "45",
+    "President": "50"
 }

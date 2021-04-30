@@ -1,6 +1,6 @@
 {
   "name": "crypton",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A discord bot made in JS with discord.js library",
   "main": "index.js",
   "directories": {
@@ -8,8 +8,9 @@
   },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
-    "lavalink": "java -jar lavalink.jar"
+    "dev": "npx nodemon index.js",
+    "lint": "npx eslint . --fix",
+    "push": "npx eslint . --fix && git push"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "erela.js": "^2.3.2",
     "erela.js-spotify": "^1.2.0",
     "eslint": "^7.21.0",
+    "genius-lyrics-api": "^3.0.6",
     "moment": "^2.29.1",
     "mongoose": "^5.11.18",
     "ms": "^2.1.3",

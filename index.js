@@ -8,8 +8,8 @@ const client = new discord.Client();
 require("./handlers/mainHandler.js").config(["MUSIC", "DATABASE"], client);
 /* Log-in the client using super secret token if any*/
 if (process.env.TOKEN) {
-  client.login(process.env.TOKEN);
+	client.login(process.env.TOKEN);
 } else {
-  console.error("ERROR: Token not found in .env file! Make sure you have the token correct");
-  process.exit(1);
+	console.error("ERROR: Token not found in .env file! Make sure you have the token correct");
+	process.exit(1);
 }

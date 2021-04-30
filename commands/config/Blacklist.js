@@ -11,7 +11,7 @@ module.exports =
 	permissions: "MANAGE_GUILD",
 	run: async(message, args) => {
 
-        const data = await blacklistDb.findOne({
+		const data = await blacklistDb.findOne({
 			guildId: message.guild.id
 		});
 

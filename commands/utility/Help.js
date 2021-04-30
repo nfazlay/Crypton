@@ -12,13 +12,13 @@ module.exports = {
 		const { categories } = message.client;
 		const embed = new discord.MessageEmbed();
 		const data = [];
-                let prefix = process.env.PREFIX;
+		let prefix = process.env.PREFIX;
 		const prefixData = await prefixDb.findOne({
 			guildId: message.guild.id,
 		});
-                if (prefixData) {
-                    prefix = prefixData.prefix;
-                }
+		if (prefixData) {
+			prefix = prefixData.prefix;
+		}
 		if (!args.length) {
 			data.push(
 				"Here's all my command categories:\n\n •" + categories.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n •")
@@ -36,7 +36,7 @@ module.exports = {
 		let toFind = args[0].toLowerCase();
 
 		if (categories.has(toFind)) {
-			const commandsOfFolder = categories.get(toFind).Collection.map(element => element.name[0].toUpperCase() + element.name.substring(1)).join("\n");
+			const commandsOfFolder = categories.get(toFind).Collection.map(element => `\`${element.name[0].toUpperCase() + element.name.substring(1)}\``).join(",");
 			const CategoryEmbed = new discord.MessageEmbed()
 				.setTitle(toFind[0].toUpperCase() + toFind.substring(1))
 				.setDescription(commandsOfFolder)
@@ -46,7 +46,7 @@ module.exports = {
 					message.author.displayAvatarURL()
 				);
 
-			return message.channel.send(Categoryembed);
+			return message.channel.send(CategoryEmbed);
 		}
 		toFind = toFind.toLowerCase();
 
@@ -59,10 +59,10 @@ module.exports = {
 				.reply("woops! that's not a command or a category")
 				.then((msg) => msg.delete({ timeout: 5000 }));
 		}
-				embed
-				.setColor("#00ffff")
-				.setAuthor("Crypton Help")
-				.setThumbnail(message.client.user.displayAvatarURL());
+		embed
+			.setColor("#00ffff")
+			.setAuthor("Crypton Help")
+			.setThumbnail(message.client.user.displayAvatarURL());
 		if (command.name) {
 			embed.addField("Name", command.name, true);
 		}
