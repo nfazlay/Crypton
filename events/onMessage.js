@@ -126,9 +126,7 @@ module.exports = {
 				if (data.xp >= (data.lvl + 1) * 200) {
 					data.xp -= (data.lvl + 1) * 200;
 					data.lvl += 1;
-					message.channel.send(
-						`Congrats <@${message.author.id}> you reached level ${data.lvl}!`
-					);
+					//message.channel.send(`Congrats <@${message.author.id}> you reached level ${data.lvl}!`);
 				}
 				data.save();
 			} else if (!data) {
@@ -146,6 +144,7 @@ module.exports = {
 		/* Get the argument and command's name from the message */
 		const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
 		const commandName = args.shift().toLowerCase();
+
 		/* Get the command from the collection */
 		const command =
 		client.commands.get(commandName) ||

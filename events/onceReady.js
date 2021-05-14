@@ -25,6 +25,6 @@ module.exports = {
 			});
 		};
 		setInterval(randomStaus, 30000);
-		console.log(`Logged in as ${client.user.tag}!`);
+		console.log(`Logged in as ${client.user.tag} with ${client.guilds.cache.size} guilds and ${client.users.cache.size} users!`);
 	},
 };
