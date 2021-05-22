@@ -49,4 +49,4 @@ Other than self-hosting you can use the following providers:
 
 
 # Contributing
-See [Contributing.md](https://github.com/crypton-technologies/crypton/contributing.md)
+See [Contributing.md](https://github.com/CryptonDevelopers/Crypton/blob/main/Contributing.md)
